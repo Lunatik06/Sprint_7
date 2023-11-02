@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
@@ -39,24 +40,23 @@ public class CreateOrderTest {
         this.color = color;
     }
 
+
+    static Faker faker = new Faker();
+    //return new Courier(faker.name().username(), faker.number().digits(6), faker.name().firstName());
     @Parameterized.Parameters(name = "Имя: {0}, фамилия: {1}, адрес: {2}, метро: {3}, телефон: {4}, дней аренды: {5}, дата доставки: {6}, комментарий: {7}, цвет: {8}")
     public static Object[][] getTestData() {
         String[] blackColor = new String[]{"BLACK"};
-        String[] greyColor = new String[]{"BLACK"};
+        String[] greyColor = new String[]{"GREY"};
         String[] bothColor = new String[]{"BLACK", "GREY"};
         String[] withoutColor = new String[]{};
 
+        // UPD: добавил рандомную генерацию данных для части полей
         return new Object[][]{
-                {"Саске", "Учиха", "Коноха, д. 5, кв 93", "1", "+7 800 355 35 35", 1, "2023-10-12", "Нужно срочно", blackColor},
-                {"Хината", "Хьюга", "Коноха, 9/22", "2", "89001230099", 6, "2023-12-10", "Можно не торопиться", greyColor},
+                {faker.name().firstName(), faker.name().lastName(), faker.address().fullAddress(), faker.number().digits(1), faker.phoneNumber().phoneNumber(), faker.number().numberBetween(1,10), "2023-10-12", "Нужно срочно", blackColor},
+                {faker.name().firstName(), faker.name().lastName(), faker.address().fullAddress(), faker.number().digits(1), faker.phoneNumber().phoneNumber(), faker.number().numberBetween(1,10), "2023-10-12", "cool", greyColor},
                 {"Первый", "Хокаге", "Деревня скрытая в листве", "4", "001, потом в тональном режиме 1", 3, "2023-10-10", " ", bothColor},
-                {"Naruto", "Uzumaki", "Hidden Lead", "5", "Два, три, четыре пять", 2, "2024-01-01", "", withoutColor},
+                {faker.name().firstName(), faker.name().lastName(), faker.address().fullAddress(), faker.number().digits(1), faker.phoneNumber().phoneNumber(), faker.number().numberBetween(1,10), "2023-12-12", "", withoutColor},
         };
-    }
-
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
     }
 
     @Test
@@ -67,6 +67,6 @@ public class CreateOrderTest {
                 deliveryDate, comment, color);
 
         ValidatableResponse response = orders.createOrder(order);
-        check.CreatedOrderSuccessfully(response);
+        check.createdOrderSuccessfully(response);
     }
 }

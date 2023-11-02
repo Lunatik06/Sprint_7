@@ -1,14 +1,20 @@
 package org.example.courier;
 
+import com.github.javafaker.Faker;
+
 import java.time.LocalDateTime;
 
 public class CourierGenerator {
+
+    static Faker faker = new Faker();
+
     public static Courier generic() {
         return new Courier("raikov", "1234", "saske");
     }
 
+    // UPD: добавил пользователю с рандомными данными получение данных из java-faker
     public static Courier random() {
-        return new Courier("raikov" + LocalDateTime.now(), "1234", "saske");
+        return new Courier(faker.name().username(), faker.number().digits(6), faker.name().firstName());
     }
 
     public static Courier withoutLogin() {

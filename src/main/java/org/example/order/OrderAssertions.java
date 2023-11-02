@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class OrderAssertions {
 
-    public void CreatedOrderSuccessfully(ValidatableResponse response) {
+    public void createdOrderSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_CREATED)
@@ -18,7 +18,7 @@ public class OrderAssertions {
 
     }
 
-    public void GetOrderListSuccessfully(ValidatableResponse response) {
+    public void getOrderListSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("orders", notNullValue())

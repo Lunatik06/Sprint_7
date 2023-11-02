@@ -1,6 +1,5 @@
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import org.example.courier.CourierGenerator;
 import org.example.order.OrderAction;
 import org.example.order.OrderAssertions;
 import org.junit.Test;
@@ -12,10 +11,10 @@ public class GetOrderListTest {
 
     @Test
     @DisplayName("4. Список заказов: Проверь, что в тело ответа возвращается список заказов.")
-    public void GetOrderListrTest() {
+    public void getOrderListTest() {
 
         ValidatableResponse response = orders.getOrderList();
-        check.GetOrderListSuccessfully(response);
+        check.getOrderListSuccessfully(response);
 
     }
 

@@ -21,7 +21,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("1. Создание курьера: курьера можно создать; запрос возвращает правильный код ответа; успешный запрос возвращает ok: true;")
-    public void CreateCourierTest() {
+    public void createCourierTest() {
         var courier = CourierGenerator.random();
 
         ValidatableResponse response = client.create(courier);
@@ -38,7 +38,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("1. Создание курьера: нельзя создать двух одинаковых курьеров.")
-    public void ForbidenCreateTwiceCourierTest() {
+    public void forbiddenCreateTwiceCourierTest() {
         var courierFirst = CourierGenerator.generic();
 
         ValidatableResponse responseFirst = client.create(courierFirst);
@@ -60,7 +60,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("1. Создание курьера: чтобы создать курьера, нужно передать в ручку все обязательные поля; если одного из полей нет, запрос возвращает ошибку")
-    public void CreateCourieWithoutObligateParamTest() {
+    public void createCourierWithoutObligateParamTest() {
         var courierWithoutLogin = CourierGenerator.withoutLogin();
 
         ValidatableResponse responseWithoutLogin = client.create(courierWithoutLogin);

@@ -15,11 +15,14 @@ public class OrderAction extends org.example.Client {
                 .then().log().all();
     }
 
+    // UPD: добавил queryParam
     @Step("Получить список заказов")
     public ValidatableResponse getOrderList() {
         return spec()
                 .when()
-                .get(ORDERS_PATH + "?limit=3")
+                .queryParam("limit", "3")
+                .get(ORDERS_PATH)
                 .then().log().all();
     }
+
 }

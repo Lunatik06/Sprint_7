@@ -21,7 +21,7 @@ public class LoginCourierTest {
 
     @Test
     @DisplayName("2. Логин курьера: курьер может авторизоваться; для авторизации нужно передать все обязательные поля; успешный запрос возвращает id.")
-    public void LoginCourierTest() {
+    public void loginCourierTest() {
         var courier = CourierGenerator.random();
 
         ValidatableResponse response = client.create(courier);
@@ -38,7 +38,7 @@ public class LoginCourierTest {
 
     @Test
     @DisplayName("2. Логин курьера: система вернёт ошибку, если неправильно указать логин; если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;")
-    public void LoginCourierWithWrongLoginTest() {
+    public void loginCourierWithWrongLoginTest() {
         var courier = CourierGenerator.generic();
 
         ValidatableResponse response = client.create(courier);
@@ -61,7 +61,7 @@ public class LoginCourierTest {
 
     @Test
     @DisplayName("2. Логин курьера: система вернёт ошибку, если неправильно указать пароль;")
-    public void LoginCourierWithWrongPasswordTest() {
+    public void loginCourierWithWrongPasswordTest() {
         var courier = CourierGenerator.generic();
 
         ValidatableResponse response = client.create(courier);
